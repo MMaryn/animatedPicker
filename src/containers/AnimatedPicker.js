@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import Actions from "../actions/rootAction";
+import Actions from "../actions/_indexAction";
 import Home from "../components/Home";
 
 class AnimatedPicker extends Component {

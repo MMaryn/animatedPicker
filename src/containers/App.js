@@ -4,12 +4,12 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 import AnimatedPicker from "./AnimatedPicker";
-import rootsReducers from "../reducers/rootReducer";
+import rootsReducers from "../reducers/_indexReducer";
 
 const rootReducer = combineReducers(rootsReducers);
 
-//const store = crateStore(rootReducer, applyMiddleware(thunk));
-const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+//const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = compose(applyMiddleware(thunk))(createStore)(rootReducer);
 
 const App = () => (
   <Provider store={store}>

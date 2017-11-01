@@ -1,24 +1,20 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import React from "react";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 
-import Actions from "../actions/rootAction";
-import Home from "../components/AnimatedPicker";
+import AnimatedPicker from "./AnimatedPicker";
+import rootsReducers from "../reducers/rootReducer";
 
-class AnimatedPicker extends Component {
-  render() {
-    return (
-      <Home store={this.props.store} actions={this.props.actions} />
-    )
-  }
-}
+const rootReducer = combineReducers(rootsReducers);
 
-const mapStateToProps = state => ({
-  store: state
-});
+//const store = crateStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
-const mapActionsToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch)
-});
+const App = () => (
+  <Provider store={store}>
+    <AnimatedPicker />
+  </Provider>
+);
 
-export default connect(mapStateToProps, mapActionsToProps)(AnimatedPicker);
+export default App;

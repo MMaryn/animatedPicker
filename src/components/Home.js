@@ -21,18 +21,21 @@ const styles = {
   },
   renderScreen: {
     flex: 0.7,
-    width: "50%",
+    width: "65%",
     borderColor: "#ddd",
-    borderRadius: 20,
     marginBottom: 10,
     shadowColor: "#000",
     alignItems: "center",
     justifyContent: "center",
+    shadowOffset: { width: 5, height: 10 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1,
   },
   preview: {
-    borderRadius: 20,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden"
   },
   buttons: {
     height: 40,
@@ -80,27 +83,33 @@ class Home extends Component {
       outputRange: [previousColor, activeColor]
     });
 
-    const interpolateBorderRadius = animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [500, 20]
-    });
-
     const interpolateWidth = animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ["0%", "100%"]
+      outputRange: [1, 300]
     });
 
+    const interpolateBorderRadius = animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [500, 200]
+    });
+
+
     const interpolateHeight = animatedValue.interpolate({
-      inputRange: [0, 0.9, 1],
-      outputRange: ["0%", "70%", "100%"]
+      inputRange: [0, 1],
+      outputRange: [1, 300]
+    });
+
+    const interpolateScale = animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 2]
     });
 
     const animatedStyle = {
       backgroundColor: interpolateColor,
       height: interpolateHeight,
-      width: interpolateWidth,
       borderRadius: interpolateBorderRadius,
-      transform: [{ scale: animatedValue }],
+      width: interpolateWidth,
+      transform: [{ scale: interpolateScale }],
     };
 
     return animatedStyle;
